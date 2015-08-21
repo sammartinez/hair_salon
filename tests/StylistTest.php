@@ -24,7 +24,7 @@
                 function test_getStylistName()
                 {
                     //Arrange
-                    $name = "Vicki";
+                    $name = "vicki";
                     $test_stylist = new Stylist($name);
 
                     //Act
@@ -37,7 +37,7 @@
                 function test_save()
               {
                   //Arrange
-                  $name = "Vicki";
+                  $name = "vicki";
                   $test_stylist = new Stylist($name);
                   $test_stylist->save();
 
@@ -46,6 +46,36 @@
 
                   //Assert
                   $this->assertEquals($test_stylist, $result[0]);
+              }
+
+              function test_getAll()
+              {
+                  //Arrange
+                  $name = "vicki";
+                  $test_stylist = new Stylist($name);
+                  $test_stylist->save();
+
+                  //Act
+                  $result = Stylist::getAll();
+
+                  //Assert
+                  $this->assertEquals([$test_stylist], $result);
+              }
+
+              function test_deleteAll()
+              {
+                  //Arrange
+                  $name = "vicki";
+                  $test_stylist = new Stylist($name);
+                  $test_stylist->save();
+
+                  //Act
+                  Stylist::deleteAll();
+                  $result = Stylist::getAll();
+
+                  //Assert
+                  $this->assertEquals([], $result);
+
               }
         }
  ?>
