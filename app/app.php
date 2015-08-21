@@ -79,12 +79,19 @@
         return $app['twig']->render('delete_clients.html.twig');
     });
 
-    //Stylist Delete Call
+    //Stylist Delete All Call
     $app->post("delete_stylists", function() use ($app) {
         Stylist::deleteAll();
 
         return $app['twig']->render('delete_stylists.html.twig');
     });
+
+    //Stylist Delete Single Call
+    $app->delete("/stylists/{id}", function($id) use ($app) {
+    $category = Stylist::find($id);
+    $category->delete();
+    return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
+});
 
     return $app;
 
