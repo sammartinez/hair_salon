@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+        <link rel="stylesheet" href="/css/styles.css" media="screen" charset="utf-8">
+        <title>Hair Salon!</title>
+    </head>
+    <body>
+        <h1>Update your {{ stylist.getStylistName }} name </h1>
+
+        <form action="/stylists/{{ stylist.getId }}" method="post">
+          <input name="_method" type="hidden" value="patch">
+
+          <label for="stylist_name">Rename your stylist:</label>
+          <input id="name" name="stylist_name" type="text">
+
+          <button type="submit" class= "btn btn-info">Update</button>
+        </form>
+    </body>
+</html>
