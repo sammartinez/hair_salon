@@ -13,8 +13,8 @@
                 <p>Here are your clients:</p>
                 <ul>
                     {% for client in clients %}
-                        <h2>Name: {{ client.getName }} </h2>
-                        <h3>Phone: {{ client.getPhone }} </h3>
+                        <h3>Name: {{ client.getName }} </h2>
+                        <h4>Phone: {{ client.getPhone }} </h3>
                     {% endfor %}
                 </ul>
             {% endif %}
@@ -39,7 +39,6 @@
                     <button type="submit" class="btn btn-danger">Delete Clients</button>
                 </form>
               </div>
-            </div>
             <p><a href="/stylists/{{ stylist.getId }}/edit">Edit Stylist</a></p>
             <p><button type="submit" class="btn btn-success"><a href="/">Home</a></button></p>
         </div>

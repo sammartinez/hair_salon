@@ -5,21 +5,24 @@
         <title>Hair Salon!</title>
     </head>
     <body>
-        <h1>Update your {{ stylist.getStylistName }} name </h1>
+        <div class="container">
 
-        <form action="/stylists/{{ stylist.getId }}" method="post">
-          <input name="_method" type="hidden" value="patch">
+            <h1>Update your {{ stylist.getStylistName }} name </h1>
 
-          <label for="stylist_name">Rename your stylist:</label>
-          <input id="name" name="stylist_name" type="text">
+            <form action="/stylists/{{ stylist.getId }}" method="post">
+              <input name="_method" type="hidden" value="patch">
 
-          <button type="submit" class= "btn btn-info">Update</button>
-        </form>
+              <label for="stylist_name">Rename your stylist:</label>
+              <input id="name" name="stylist_name" type="text">
 
-        <form action="/stylists/{{ stylist.getId }}" method="post">
-            <input name="_method" type="hidden" value="delete">
+              <button type="submit" class= "btn btn-info">Update</button>
+            </form>
 
-            <button type="submit">Delete this stylist</button>
-        </form>
+            <form action="/stylists/{{ stylist.getId }}" method="post">
+                <input name="_method" type="hidden" value="delete">
+
+                <button type="submit" class="btn btn-default">Delete this stylist</button>
+            </form>
+        </div>
     </body>
 </html>
