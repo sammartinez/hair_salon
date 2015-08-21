@@ -42,9 +42,9 @@
 
     //Patch Calls
     $app->patch("/stylists/{id}", function($id) use ($app) {
-        $name = $_POST['stylist_name'];
+        $name_stylist = $_POST['stylist_name'];
         $stylist = Stylist::find($id);
-        $stylist->update($name);
+        $stylist->update($name_stylist);
 
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
     });
@@ -54,10 +54,10 @@
     $app->post("/clients", function() use ($app) {
         $name = $_POST['name'];
         $phone = $_POST['phone'];
-        $stylist_id = $_POST['cuisine_id'];
+        $stylist_id = $_POST['stylist_id'];
         $client = new Client($name, $phone, $stylist_id, $id = null);
-
         $client->save();
+
         $stylist = Stylist::find($stylist_id);
 
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));

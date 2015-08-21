@@ -2,17 +2,27 @@
 <html>
     <head>
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
-        <link rel="stylesheet" href="/css/styles.css" media="screen" charset="utf-8">
+        <!-- <link rel="stylesheet" href="/css/styles.css" media="screen" charset="utf-8"> -->
         <title>Hair Salon!</title>
     </head>
     <body>
         <div class="container">
             <h1>{{ stylist.getStylistName }}</h1>
 
+            {% if clients is not empty %}
+                <p>Here are your clients:</p>
+                <ul>
+                    {% for client in clients %}
+                        <h2>Name: {{ client.getName }} </h2>
+                        <h3>Phone: {{ client.getPhone }} </h3>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
             <h2>Add a client</h2>
             <div class="form-group">
               <form action="/clients" method="post">
-                  <input id="stylist_id" type="hidden" name="stylist_id" value="{{ stylist.getId }}">
+                  <input id="stylist_id" type="hidden" name="stylist_id" value=" {{ stylist.getId() }} ">
 
                   <label for="name">Client name:</label>
                   <input type="text" name="name" class="form-control" id="name">
@@ -24,23 +34,14 @@
                     <button type="submit" class="btn btn-info">Add Client</button>
                 </form>
 
+                  </br>
                 <form action="/delete_clients" method="post">
                     <button type="submit" class="btn btn-danger">Delete Clients</button>
                 </form>
               </div>
             </div>
-            <p><a href="/cuisines/{{ stylist.getId }}/edit">Edit Stylist</a></p>
-
-            {% if clients is not empty %}
-            <p>Here are your clients:</p>
-            <ul>
-                {% for client in clients %}
-                    <h2>Name: {{ client.getName }}</h2>
-                    <h3>Phone: {{ client.getPhone }}</h3>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            <p><button type="submit" name="home"><a href="/">Home</a></button></p>
+            <p><a href="/stylists/{{ stylist.getId }}/edit">Edit Stylist</a></p>
+            <p><button type="submit" class="btn btn-success"><a href="/">Home</a></button></p>
         </div>
     </body>
 </html>
