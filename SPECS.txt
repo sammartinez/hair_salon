@@ -1,0 +1,31 @@
+
+
+---------Zero Case-----------
+Behavior: Adding a name to our Stylist Class
+Input: "Becky"
+Output: "Becky"
+
+---------First Case-----------
+Behavior: Update (or Change) a name to our Stylist Class
+Input: "Becky"
+Output: "Rebecca"
+
+---------Second Case-----------
+Behavior: Delete a name in our Stylist Class
+Input: "Rebecca"
+Output: null
+
+---------Third Case-----------
+Behavior: Adding a name to our Client Class
+Input: "Sam Martinez"
+Output: "Sam Martinez"
+
+---------Fourth Case-----------
+Behavior: Update (or Change) a name to our Client Class
+Input: "Sam Martinez"
+Output: "Kelli Field"
+
+---------Fifth Case-----------
+Behavior: Delete a name in our Client Class
+Input: "Kelli Field"
+Output: null
