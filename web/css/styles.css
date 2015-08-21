@@ -1,0 +1,25 @@
+body {
+    background-image: url(http://1u6nog3dmaz01hcka82bsn8d8f.wpengine.netdna-cdn.com/wp-content/uploads/2013/08/Hair-Salons-in-Winston-Salem.jpg);
+    background-size: auto;
+    background-repeat: no-repeat;
+    border-block-end-style: dashed;
+}
+
+h1, h2, h3, h4, h5 ,h6, p, label {
+    text-align: left;
+    color: #fff;
+    text-shadow: 2px 2px 4px black;
+}
+
+button {
+    text-shadow: 2px 2px 4px black;
+}
+
+a {
+    color: #fff;
+    text-shadow: 2px 2px 4px black;
+}
+
+a:hover {
+    color: #E9EFF3;
+}

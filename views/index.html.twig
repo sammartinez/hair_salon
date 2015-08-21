@@ -18,10 +18,10 @@
             </form>
 
             {% if stylists is not empty %}
-                <p>Here are all your Stylists: </p>
+                <h4>Here are all your Stylists: </h4>
                 <ul>
                     {% for stylist in stylists %}
-                        <li><a href="/stylists/{{ stylist.getId }}">{{ stylist.getStylistName }}</a></li>
+                        <h4><a href="/stylists/{{ stylist.getId }}">{{ stylist.getStylistName }}</a></h4>
                     {% endfor %}
                 </ul>
                 {% else %}
