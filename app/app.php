@@ -1,0 +1,66 @@
+<?php
+
+    require_once __DIR__."/../vendor/autoload.php";
+    require_once __DIR__."/../src/Stylist.php";
+    require_once __DIR__."/../src/Client.php";
+
+    //Start Silex app
+    $app = new Silex\Application();
+
+
+    $server = 'mysql:host=localhost:8889;dbname=hair_salon';
+    $username = 'root';
+    $password = 'root';
+    $DB = new PDO($server, $username, $password);
+
+    //Twig Paths
+    $app->register(new Silex\Provider\TwigServiceProvider(), array(
+        'twig.path' => __DIR__.'/../views'
+    ));
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
+
+    // Get Calls
+    $app->get("/", function() use($app) {
+        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
+    });
+
+    //Stylists getId
+    $app->get("/stylists/{id}", function($id) use ($app) {
+        $stylist = Stylist::find($id);
+
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'stylists' => $stylist->getClients()));
+    });
+
+    //Stylists getId/edit
+    $app->get("/stylists/{id}/edit", function($id) use ($app) {
+        $stylist = Stylist::find($id);
+        return $app['twig']->render('stylist_edit.html.twig', array('stylist' => $stylist));
+    });
+
+    //Patch Calls
+    $app->patch("/stylists/{id}", function($id) use ($app) {
+        $name = $_POST['stylist_name'];
+        $stylist = Stylist::find($id);
+        $stylist->update($name);
+
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
+    });
+
+    //Post Calls
+    //Client Post Calls
+    $app->post("/clients", function() use ($app) {
+        $name = $_POST['name'];
+        $phone = $_POST['phone'];
+        $stylist_id = $_POST['cuisine_id'];
+        $client = new Client($name, $phone, $stylist_id, $id = null);
+
+        $client->save();
+        $stylist = Stylist::find($stylist_id);
+
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
+    });
+
+
+
+ ?>
