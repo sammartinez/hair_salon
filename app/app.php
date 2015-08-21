@@ -22,6 +22,7 @@
 
     // Get Calls
     $app->get("/", function() use($app) {
+
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
     });
 
@@ -35,6 +36,7 @@
     //Stylists getId/edit
     $app->get("/stylists/{id}/edit", function($id) use ($app) {
         $stylist = Stylist::find($id);
+
         return $app['twig']->render('stylist_edit.html.twig', array('stylist' => $stylist));
     });
 
@@ -69,6 +71,21 @@
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
     });
 
+    //Delete Calls
+    //Client Delete Call
+    $app->post("delete_clients", function() use ($app) {
+        Client::deleteAll();
 
+        return $app['twig']->render('delete_clients.html.twig');
+    });
+
+    //Stylist Delete Call
+    $app->post("delete_stylists", function() use ($app) {
+        Stylist::deleteAll();
+
+        return $app['twig']->render('delete_stylists.html.twig');
+    });
+
+    return $app;
 
  ?>
