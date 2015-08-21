@@ -30,6 +30,23 @@
                 $this->stylist_name = (string) $new_stylist_name;
             }
 
+            function getClients()
+            {
+                $clients = array();
+                $returned_clients = $GLOBALS['DB']->query("SELECT * FROM client WHERE stylist_id = {$this->getId()};");
+
+                foreach($returned_clients as $client) {
+                    $name = $client['name'];
+                    $phone = $client['phone'];
+                    $stylist_id = $client['stylist_id'];
+                    $id = $client['id'];
+                    $new_client = new Client($name, $phone, $stylist_id, $id);
+                    array_push($clients, $new_client);
+                }
+
+                return $clients;
+            }
+
             //Save function
             function save()
             {
