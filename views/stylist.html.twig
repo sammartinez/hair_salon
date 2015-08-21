@@ -22,7 +22,7 @@
             <h2>Add a client</h2>
             <div class="form-group">
               <form action="/clients" method="post">
-                  <input id="stylist_id" type="hidden" name="stylist_id" value=" {{ stylist.getId() }} ">
+                  <input id="stylist_id" type="hidden" name="stylist_id" value= {{ stylist.getId() }}>
 
                   <label for="name">Client name:</label>
                   <input type="text" name="name" class="form-control" id="name">
