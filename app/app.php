@@ -61,6 +61,14 @@
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
     });
 
+    //Stylist Post Calls
+    $app->post("/stylists", function() use ($app) {
+        $stylist = new Stylist($_POST['stylist_name']);
+        $stylist->save();
+
+        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
+    });
+
 
 
  ?>
