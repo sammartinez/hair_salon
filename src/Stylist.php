@@ -1,7 +1,7 @@
 <?php
 
 
-        class Sytlist
+        class Stylist
         {
             private $stylist_name;
             private $id;
@@ -76,7 +76,7 @@
                 $stylists = Stylist::getAll();
 
                 foreach($stylists as $stylist) {
-                    $stylist_id = $cuisine->getId();
+                    $stylist_id = $stylist->getId();
 
                     if($stylist_id == $search_id) {
                         $found_stylist = $stylist;
