@@ -55,13 +55,15 @@
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
     });
 
-    $app->patch("/clients", function() use ($app) {
-        $new_name = $_POST['name'];
-        $client->update($new_name);
+    $app->patch("/clients/{id}", function($id) use ($app) {
+        $name_client = $_POST['name'];
+        $client = Client::find($id);
+        $client->update($name_client);
 
+        $stylist_id = $client->getStylistId();
         $stylist = Stylist::find($stylist_id);
 
-        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist,'clients' => $stylist->getClients()));
     });
 
     //Post Calls
