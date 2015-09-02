@@ -13,13 +13,12 @@
                 <p>Here are your clients:</p>
                 <ul>
                     {% for client in clients %}
-                        <h3>Name: {{ client.getName }} </h2>
-                        <h4>Phone: {{ client.getPhone }} </h3>
+                        <h4><a href="/clients/{{ client.getId }}/edit">{{ client.getName }}</a></h4>
+                        <h4><a href="/clients/{{ client.getId }}/edit">Phone: {{ client.getPhone }}</a></h3>
                     {% endfor %}
                 </ul>
-            {% endif %}
 
-            <p><a href="/clients/{{ client.getId }}/edit">Edit Client</a></p>
+            {% endif %}
 
             <h2>Add a client</h2>
             <div class="form-group">

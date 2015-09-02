@@ -6,7 +6,7 @@
 
     //Start Silex app
     $app = new Silex\Application();
-
+    $app[debug] = true;
 
     $server = 'mysql:host=localhost:8889;dbname=hair_salon';
     $username = 'root';
@@ -41,9 +41,9 @@
     });
 
     $app->get("/clients/{id}/edit", function($id) use ($app) {
-        $stylist = Stylist::find($id);
+        $client = Client::find($id);
 
-        return $app['twig']->render('client_edit.html.twig', array('stylist' => $stylist));
+        return $app['twig']->render('client_edit.html.twig', array('client' => $client));
     });
 
     //Patch Calls
@@ -51,6 +51,15 @@
         $name_stylist = $_POST['stylist_name'];
         $stylist = Stylist::find($id);
         $stylist->update($name_stylist);
+
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
+    });
+
+    $app->patch("/clients", function() use ($app) {
+        $new_name = $_POST['name'];
+        $client->update($new_name);
+
+        $stylist = Stylist::find($stylist_id);
 
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
     });
@@ -69,6 +78,7 @@
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
     });
 
+
     //Stylist Post Calls
     $app->post("/stylists", function() use ($app) {
         $stylist = new Stylist($_POST['stylist_name']);
@@ -79,14 +89,14 @@
 
     //Delete Calls
     //Client Delete Call
-    $app->post("delete_clients", function() use ($app) {
+    $app->post("/delete_clients", function() use ($app) {
         Client::deleteAll();
 
         return $app['twig']->render('delete_clients.html.twig');
     });
 
     //Stylist Delete All Call
-    $app->post("delete_stylists", function() use ($app) {
+    $app->post("/delete_stylists", function() use ($app) {
         Stylist::deleteAll();
 
         return $app['twig']->render('delete_stylists.html.twig');
@@ -103,7 +113,7 @@
     $app->delete("/clients/{id}", function($id) use ($app) {
     $client = Client::find($id);
     $client->delete();
-    return $app['twig']->render('index.html.twig', array('clients' => Client::getAll()));
+    return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
     });
 
     return $app;
